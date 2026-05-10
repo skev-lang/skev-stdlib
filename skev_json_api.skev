@@ -1,0 +1,25 @@
+#! skev.json — JSON Serialisation Library
+#! Copyright © 2026 AJ. All Rights Reserved. skev.dev
+
+kind JsonError >>
+    parse_failed
+    invalid_type
+    key_not_found
+    encode_failed
+<< JsonError
+
+#! Parse a JSON string. Returns nothing on parse failure.
+parse(json_str: string) -> result[string]
+<< parse
+
+#! Serialise a value to a JSON string.
+stringify(value: string) -> result[string]
+<< stringify
+
+#! Serialise with indentation for human readability.
+stringify_pretty(value: string, indent: int) -> result[string]
+<< stringify_pretty
+
+#! True if string is valid JSON.
+is_valid(json_str: string) -> bool
+<< is_valid

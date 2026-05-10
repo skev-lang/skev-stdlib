@@ -1,0 +1,83 @@
+#! skev.string — String Operations Library
+#! Copyright © 2026 AJ. All Rights Reserved. skev.dev
+
+#! Length in characters.
+length(s: string) -> int
+<< length
+
+#! True if s contains substr.
+contains(s: string, substr: string) -> bool
+<< contains
+
+#! True if s starts with prefix.
+starts_with(s: string, prefix: string) -> bool
+<< starts_with
+
+#! True if s ends with suffix.
+ends_with(s: string, suffix: string) -> bool
+<< ends_with
+
+#! Remove leading and trailing whitespace.
+trim(s: string) -> string
+<< trim
+
+#! Convert to uppercase.
+upper(s: string) -> string
+<< upper
+
+#! Convert to lowercase.
+lower(s: string) -> string
+<< lower
+
+#! Replace all occurrences of old with new_s.
+replace(s: string, old: string, new_s: string) -> string
+<< replace
+
+#! Split by separator. split("a,b,c", ",") → ["a","b","c"]
+split(s: string, sep: string) -> list[string]
+<< split
+
+#! Join list with separator. join(["a","b"], ",") → "a,b"
+join(parts: list[string], sep: string) -> string
+<< join
+
+#! Substring from start index, length chars.
+#! Returns nothing if out of bounds.
+substr(s: string, start: int, length: int) -> maybe string
+<< substr
+
+#! Index of first occurrence. Returns nothing if not found.
+find(s: string, substr: string) -> maybe int
+<< find
+
+#! Repeat string n times. repeat("ab", 3) → "ababab"
+repeat(s: string, n: int) -> string
+<< repeat
+
+#! Pad left to width with pad_char.
+pad_left(s: string, width: int, pad_char: string) -> string
+<< pad_left
+
+#! Pad right to width with pad_char.
+pad_right(s: string, width: int, pad_char: string) -> string
+<< pad_right
+
+#! Convert int to string.
+from_int(n: int) -> string
+<< from_int
+
+#! Convert float to string with decimal_places digits.
+from_float(x: float, decimal_places: int) -> string
+<< from_float
+
+#! Parse string as int. Returns nothing if invalid.
+to_int(s: string) -> maybe int
+<< to_int
+
+#! Parse string as float. Returns nothing if invalid.
+to_float(s: string) -> maybe float
+<< to_float
+
+#! True if string is empty or only whitespace.
+is_blank(s: string) -> bool
+<< is_blank

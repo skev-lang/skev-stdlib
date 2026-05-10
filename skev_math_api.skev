@@ -1,0 +1,173 @@
+#! skev.math — Standard Mathematics Library
+#! Copyright © 2026 AJ. All Rights Reserved. skev.dev
+#!
+#! Always available — no import required (Layer 1 of standard library).
+#! In the real compiler these map to LLVM intrinsics for zero overhead.
+#! All functions operate on float unless otherwise noted.
+
+# ── Constants ──────────────────────────────────────────────────
+fixed PI  :: float = 3.14159265358979323846
+fixed TAU :: float = 6.28318530717958647692    # full circle
+fixed E   :: float = 2.71828182845904523536
+fixed INF :: float = 1.0 / 0.0                # positive infinity
+
+# ── Clamping and mapping ───────────────────────────────────────
+
+#! Clamp value to [min_val, max_val].
+#! Classic use: health = math.clamp(health - damage, 0, max_health)
+clamp(value: float, min_val: float, max_val: float) -> float
+<< clamp
+
+#! Clamp integer value to [min_val, max_val].
+clamp_int(value: int, min_val: int, max_val: int) -> int
+<< clamp_int
+
+#! Map value from [in_min, in_max] to [out_min, out_max].
+#! Classic use: bar_width = math.map(health, 0, 100, 0, 200)
+map(value: float, in_min: float, in_max: float,
+    out_min: float, out_max: float) -> float
+<< map
+
+# ── Interpolation ──────────────────────────────────────────────
+
+#! Linear interpolation. t=0→a, t=0.5→midpoint, t=1→b.
+#! Classic use: cam_x = math.lerp(cam_x, target_x, 0.1)
+lerp(a: float, b: float, t: float) -> float
+<< lerp
+
+#! Smooth interpolation with ease-in and ease-out.
+#! Looks more natural than lerp for UI and camera work.
+smoothstep(edge0: float, edge1: float, x: float) -> float
+<< smoothstep
+
+# ── Rounding ───────────────────────────────────────────────────
+
+#! Round down to nearest integer.
+floor(x: float) -> int
+<< floor
+
+#! Round up to nearest integer.
+ceil(x: float) -> int
+<< ceil
+
+#! Round to nearest integer.
+round(x: float) -> int
+<< round
+
+#! Absolute value.
+abs(x: float) -> float
+<< abs
+
+#! Absolute value of integer.
+abs_int(x: int) -> int
+<< abs_int
+
+# ── Power and roots ────────────────────────────────────────────
+
+#! Square root. Panics if x < 0.
+sqrt(x: float) -> float
+<< sqrt
+
+#! Power: math.pow(2, 10) = 1024.
+pow(base: float, exp: float) -> float
+<< pow
+
+#! Natural logarithm. Panics if x <= 0.
+log(x: float) -> float
+<< log
+
+#! Log base 2. Panics if x <= 0.
+log2(x: float) -> float
+<< log2
+
+#! Log base 10. Panics if x <= 0.
+log10(x: float) -> float
+<< log10
+
+# ── Trigonometry (radians) ─────────────────────────────────────
+
+#! Sine. Range: -1.0 to 1.0.
+sin(x: float) -> float
+<< sin
+
+#! Cosine. Range: -1.0 to 1.0.
+cos(x: float) -> float
+<< cos
+
+#! Tangent.
+tan(x: float) -> float
+<< tan
+
+#! Angle of 2D vector. Classic: angle = math.atan2(dy, dx)
+atan2(y: float, x: float) -> float
+<< atan2
+
+#! Arc sine. Input range: -1.0 to 1.0.
+asin(x: float) -> float
+<< asin
+
+#! Arc cosine. Input range: -1.0 to 1.0.
+acos(x: float) -> float
+<< acos
+
+# ── Angle conversion ───────────────────────────────────────────
+
+#! Degrees to radians. 180° = π radians.
+deg_to_rad(degrees: float) -> float
+<< deg_to_rad
+
+#! Radians to degrees. π radians = 180°.
+rad_to_deg(radians: float) -> float
+<< rad_to_deg
+
+# ── Min / Max / Sign ───────────────────────────────────────────
+
+#! Larger of two values.
+max(a: float, b: float) -> float
+<< max
+
+#! Smaller of two values.
+min(a: float, b: float) -> float
+<< min
+
+#! Larger of two integers.
+max_int(a: int, b: int) -> int
+<< max_int
+
+#! Smaller of two integers.
+min_int(a: int, b: int) -> int
+<< min_int
+
+#! Sign: positive→1.0  negative→-1.0  zero→0.0
+sign(x: float) -> float
+<< sign
+
+# ── Noise ──────────────────────────────────────────────────────
+
+#! Value noise: consistent smooth random for any coordinate.
+#! Same input always gives same output.
+#! Classic: height = math.noise(world_x * 0.01, world_z * 0.01)
+noise(x: float) -> float
+<< noise
+
+#! 2D value noise.
+noise2(x: float, y: float) -> float
+<< noise2
+
+#! 3D value noise.
+noise3(x: float, y: float, z: float) -> float
+<< noise3
+
+# ── Float checks ───────────────────────────────────────────────
+
+#! True if x is +infinity or -infinity.
+is_inf(x: float) -> bool
+<< is_inf
+
+#! True if x is NaN (not a number).
+is_nan(x: float) -> bool
+<< is_nan
+
+#! True if x is a finite number (not inf or nan).
+is_finite(x: float) -> bool
+<< is_finite

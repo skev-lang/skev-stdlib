@@ -1,0 +1,69 @@
+#! skev.network — Network Library
+#! Copyright © 2026 AJ. All Rights Reserved. skev.dev
+#!
+#! Import with: import skev.network
+#! Capability required: network.outbound (in skev.pkg)
+
+kind NetworkError >>
+    timeout
+    connection_refused
+    dns_failed
+    ssl_error
+    invalid_url
+    server_error
+    parse_error
+    auth_failed
+<< NetworkError
+
+data HttpResponse >>
+    status_code :: int
+    body        :: string
+    ok          :: bool     # true if status_code 200-299
+<< HttpResponse
+
+data HttpRequest >>
+    url         :: string
+    body        :: string
+    timeout_ms  :: int = 5000
+<< HttpRequest
+
+#! HTTP GET request.
+#! Classic use: fetch leaderboard from Supabase REST API.
+http_get(url: string) -> result[HttpResponse]
+<< http_get
+
+#! HTTP GET with custom headers (auth tokens, content-type).
+http_get_headers(url: string,
+                 auth_token: string) -> result[HttpResponse]
+<< http_get_headers
+
+#! HTTP POST with JSON body.
+#! Classic use: submit score to backend, authenticate player.
+http_post(url: string,
+          body: string,
+          auth_token: string) -> result[HttpResponse]
+<< http_post
+
+#! HTTP PUT — update existing resource.
+http_put(url: string,
+         body: string,
+         auth_token: string) -> result[HttpResponse]
+<< http_put
+
+#! HTTP DELETE — remove a resource.
+http_delete(url: string,
+            auth_token: string) -> result[HttpResponse]
+<< http_delete
+
+#! True if network is reachable (pings skev.dev).
+is_online() -> bool
+<< is_online
+
+#! URL-encode a string (spaces → %20 etc.)
+url_encode(s: string) -> string
+<< url_encode
+
+#! Build a query string from key-value pairs.
+#! build_query("score", "9999", "name", "AJ") → "score=9999&name=AJ"
+build_query(pairs: list[string]) -> string
+<< build_query

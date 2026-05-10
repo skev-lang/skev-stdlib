@@ -1,0 +1,76 @@
+#! skev.file — File System Library
+#! Copyright © 2026 AJ. All Rights Reserved. skev.dev
+#!
+#! Import with: import skev.file
+
+kind FileError >>
+    not_found
+    permission_denied
+    already_exists
+    is_directory
+    disk_full
+    invalid_path
+    read_error
+    write_error
+<< FileError
+
+#! Read entire file as a string. Fails if file does not exist.
+read_text(path: string) -> result[string]
+<< read_text
+
+#! Write string to file. Creates file if it does not exist.
+write_text(path: string, content: string) -> result[nothing]
+<< write_text
+
+#! Append string to file. Creates file if it does not exist.
+append_text(path: string, content: string) -> result[nothing]
+<< append_text
+
+#! True if path exists (file or directory).
+exists(path: string) -> bool
+<< exists
+
+#! True if path exists and is a file (not a directory).
+is_file(path: string) -> bool
+<< is_file
+
+#! True if path exists and is a directory.
+is_dir(path: string) -> bool
+<< is_dir
+
+#! Create directory. Fails if already exists.
+make_dir(path: string) -> result[nothing]
+<< make_dir
+
+#! Create directory and all parent directories. No error if exists.
+make_dir_all(path: string) -> result[nothing]
+<< make_dir_all
+
+#! Delete a file. Fails if it does not exist or is a directory.
+delete_file(path: string) -> result[nothing]
+<< delete_file
+
+#! List names of entries in a directory.
+list_dir(path: string) -> result[list[string]]
+<< list_dir
+
+#! Size of file in bytes.
+file_size(path: string) -> result[int]
+<< file_size
+
+#! Join path components with the correct separator.
+#! path_join("save", "player.json") → "save/player.json"
+path_join(a: string, b: string) -> string
+<< path_join
+
+#! File name without directory. path_name("save/player.json") → "player.json"
+path_name(path: string) -> string
+<< path_name
+
+#! Directory part of path. path_dir("save/player.json") → "save"
+path_dir(path: string) -> string
+<< path_dir
+
+#! File extension. path_ext("player.json") → ".json"
+path_ext(path: string) -> string
+<< path_ext
